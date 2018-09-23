@@ -13,8 +13,9 @@ with open("config.ini") as f:
 config = ConfigParser.RawConfigParser(allow_no_value=True)
 config.readfp(io.BytesIO(sample_config))
 
-###########################
+################
 # Variables
+################
 influx_server = config.get('INFLUXDB', 'influxdb_server') # Ifluxdb server adre$
 influx_port = int(config.get('INFLUXDB', 'influxdb_port')) # Influxdb port
 influx_db = config.get('INFLUXDB', 'influxdb_databasename') # influxdb name
@@ -53,9 +54,9 @@ def influx():
              client.write_points (DataJson,protocol='json')
 
 
-################################################################################################################################################
+##############
 #Main program
-################################################################################################################################################
+##############
 
 #Set COM port config
 ser = serial.Serial()
@@ -76,7 +77,6 @@ except:
 
 
 #Initialize
-# stack is mijn list met de 26 regeltjes.
 p1_teller=0
 stack=[]
 
@@ -96,7 +96,6 @@ while p1_teller < 38:
     p1_teller = p1_teller +1
 
 #Initialize
-# stack_teller is mijn tellertje voor de 26 weer door te lopen. Waarschijnlijk mag ik die p1_teller ook gebruiken
 stack_teller=0
 meter=0
 
@@ -108,10 +107,8 @@ while stack_teller < 38:
    if stack[stack_teller][0:9] == "1-0:1.8.1":
 	T1afgenomen = float(stack[stack_teller][10:20])
 	meter = meter + T1afgenomen
-        print T1afgenomen
    elif stack[stack_teller][0:9] == "1-0:1.8.2":
 	T2afgenomen = float(stack[stack_teller][10:20])
-        print T2afgenomen
 	meter = meter + T2afgenomen
 # Daltarief, teruggeleverd vermogen 1-0:2.8.1
    elif stack[stack_teller][0:9] == "1-0:2.8.1":
@@ -124,7 +121,6 @@ while stack_teller < 38:
 # Huidige stroomafname: 1-0:1.7.0
    elif stack[stack_teller][0:9] == "1-0:1.7.0":
 	vermogen = float(stack[stack_teller][10:16])
-        print vermogen
 # Huidig teruggeleverd vermogen: 1-0:1.7.0
    elif stack[stack_teller][0:9] == "1-0:2.7.0":
 	Teruggeleverdvermogen = float(stack[stack_teller][10:16])
